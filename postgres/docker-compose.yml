@@ -3,6 +3,7 @@ services:
   db:
     image: "postgres:latest"
     container_name: "my_postgres"
+    restart: always
     ports:
       - "54320:5432"
     volumes:

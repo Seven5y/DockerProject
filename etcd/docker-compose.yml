@@ -1,0 +1,91 @@
+version: '3'
+networks:
+  etcd_network:
+
+services:
+  etcd1:
+    image: quay.io/coreos/etcd:latest
+    container_name: my_etcd1
+    command:
+      - etcd
+      - --name
+      - etcd1
+      - --data-dir
+      - /etcd-data
+      - --advertise-client-urls
+      - http://0.0.0.0:2379
+      - --listen-client-urls
+      - http://0.0.0.0:2379
+      - --listen-peer-urls
+      - http://0.0.0.0:2380
+      - --initial-cluster-token
+      - etcd-cluster
+      - --initial-cluster
+      - "etcd1=http://etcd1:2380"
+      - --initial-cluster-state
+      - new
+    ports:
+      - 2379:2379
+      - 2380:2380
+    networks:
+      - etcd_network
+    volumes:
+      - /Users/wuyan/data/docker/volumes/etcd/etcd1:/etcd-data
+
+  # etcd2:
+  #   image: quay.io/coreos/etcd
+  #   container_name: etcd2
+  #   command:
+  #     - etcd
+  #     - --name
+  #     - etcd2
+  #     - --data-dir
+  #     - /etcd-data
+  #     - --advertise-client-urls
+  #     - http://0.0.0.0:2379
+  #     - --listen-client-urls
+  #     - http://0.0.0.0:2379
+  #     - --listen-peer-urls
+  #     - http://0.0.0.0:2380
+  #     - --initial-cluster-token
+  #     - etcd-cluster
+  #     - --initial-cluster
+  #     - "etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380"
+  #     - --initial-cluster-state
+  #     - new
+  #   ports:
+  #     - 3379:2379
+  #     - 3380:2380
+  #   networks:
+  #     - etcd_network
+  #   volumes:
+  #     - /home/yy/code/docker/volumes/etcd/etcd2:/etcd-data
+
+  # etcd3:
+  #   image: quay.io/coreos/etcd
+  #   container_name: etcd3
+  #   command:
+  #     - etcd
+  #     - --name
+  #     - etcd3
+  #     - --data-dir
+  #     - /etcd-data
+  #     - --advertise-client-urls
+  #     - http://0.0.0.0:2379
+  #     - --listen-client-urls
+  #     - http://0.0.0.0:2379
+  #     - --listen-peer-urls
+  #     - http://0.0.0.0:2380
+  #     - --initial-cluster-token
+  #     - etcd-cluster
+  #     - --initial-cluster
+  #     - "etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380"
+  #     - --initial-cluster-state
+  #     - new
+  #   ports:
+  #     - 4379:2379
+  #     - 4380:2380
+  #   networks:
+  #     - etcd_network
+  #   volumes:
+  #     - /home/yy/code/docker/volumes/etcd/etcd3:/etcd-data

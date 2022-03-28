@@ -7,16 +7,15 @@ services:
     #镜像名称
     image: rabbitmq:latest
     #总是重启后启动
-    restart: always
+    #restart: "no"
     #端口映射
     ports:
       - 5672:5672
       - 15672:15672
-    #挂载
-    volumes:
-      - ./data:/var/lib/rabbitmq
+    #挂载k
+    # volumes:
+    #   - ./data:/var/lib/rabbitmq
     #环境变量
     environment:
-      - RABBITMQ_DEFAULT_VHOST=my_vhost
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=123456
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
